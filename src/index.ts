@@ -19,6 +19,7 @@ export default {
 
 		await untis.login();
 		const timetable = await untis.getOwnTimetableForWeek(new Date());
+		console.log(timetable);
 
 		const calendar = ical({name: "Untis"});
 
@@ -66,8 +67,8 @@ function parseTime(date: Date, timeString: string): Date {
 	// Create a new Date object based on the input date
 	const newDate = new Date(date);
 
-	// Set the hours and minutes
-	newDate.setHours(hours);
+	// hours - 1 to convert the value to UTC
+	newDate.setHours(hours - 1);
 	newDate.setMinutes(minutes);
 	newDate.setSeconds(0);
 	newDate.setMilliseconds(0);
