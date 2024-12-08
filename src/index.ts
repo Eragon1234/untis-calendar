@@ -31,8 +31,10 @@ export default {
 			const start = parseTime(date, t.startTime.toString());
 			const end = parseTime(date, t.endTime.toString());
 
+			const room = t.rooms[0].element.name;
+
 			calendar.createEvent({
-				summary: t.studentGroup,
+				summary: `${t.studentGroup} ${room}`,
 				start,
 				end
 			})
