@@ -18,8 +18,9 @@ export default {
 		const untis = new WebUntis(env.SCHOOL_NAME, env.USERNAME, env.PASSWORD, env.SCHOOL_URL);
 
 		await untis.login();
-		const timetable = await untis.getOwnTimetableForWeek(new Date());
-		console.log(timetable);
+		const thisWeek = await untis.getOwnTimetableForWeek(new Date());
+		const nextWeek = await untis.getOwnTimetableForWeek(getNextWeek());
+		const timetable = thisWeek.concat(nextWeek);
 
 		const calendar = ical({name: "Untis"});
 
@@ -76,4 +77,10 @@ function parseTime(date: Date, timeString: string): Date {
 	newDate.setMilliseconds(0);
 
 	return newDate;
+}
+
+function getNextWeek(){
+    const today = new Date();
+    const nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
+    return nextweek;
 }
